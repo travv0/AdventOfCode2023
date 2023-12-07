@@ -66,20 +66,18 @@ seeds
 |> List.min
 |> printfn "Part 1: %d"
 
-//let consolidatePairs (pairs: (uint64 * uint64) list) : (uint64 * uint64) list =
-//
-//seeds
-//|> List.makePairs
-//|> consolidatePairs
-//|> List.map (fun (seedStart, length) ->
-//    let mutable minDistance = UInt64.MaxValue
-//
-//    for seed in seedStart .. seedStart + length - 1UL do
-//        let distance = iterateMaps maps seed
-//
-//        if distance < minDistance then
-//            minDistance <- distance
-//
-//    minDistance)
-//|> List.min
-//|> printfn "Part 2: %d"
+seeds
+|> List.makePairs
+|> List.fold
+    (fun acc (seedStart, length) ->
+        let mutable minDistance = UInt64.MaxValue
+
+        for seed in seedStart .. seedStart + length - 1UL do
+            let distance = iterateMaps maps seed
+
+            if distance < minDistance then
+                minDistance <- distance
+
+        Math.Min(minDistance, acc))
+    UInt64.MaxValue
+|> printfn "Part 2: %d"
