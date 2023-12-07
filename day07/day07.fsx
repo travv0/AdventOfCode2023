@@ -69,13 +69,6 @@ let handComparer (hand1: Hand) (hand2: Hand) : int =
 let input = IO.File.ReadAllLines("input.txt")
 let hands = parseInput input
 
-
-hands
-|> Seq.sortWith handComparer
-|> Seq.map (fun hand -> hand.cards)
-|> Seq.toList
-|> printfn "%A"
-
 hands
 |> Seq.sortWith handComparer
 |> Seq.zip [ 1 .. List.length hands ]
