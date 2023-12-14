@@ -67,7 +67,6 @@ numbersSectionP = L.decimal `sepEndBy` space
 
 calculateScore :: (Int, Scratchcard) -> Int
 calculateScore (_, Scratchcard {matchingNumberCount = 0}) = 0
-calculateScore (_, Scratchcard {matchingNumberCount = 1}) = 1
 calculateScore (_, Scratchcard {matchingNumberCount = n}) = 2 ^ (n - 1)
 
 updateCounts :: Map Int Scratchcard -> (Int, Scratchcard) -> Map Int Scratchcard
