@@ -3,6 +3,7 @@
 
 module Main (main) where
 
+import Data.Functor (($>))
 import Data.Map qualified as Map
 import Data.Maybe (fromMaybe)
 import Data.Void (Void)
@@ -43,13 +44,13 @@ countP = do
   return (color, read count)
 
 colorP :: Parser Color
-colorP =
-  (Blue <$ string "blue")
-    <|> (Green <$ string "green")
-    <|> (Red <$ string "red")
+colorP = do
+  (string "red" $> Red)
+    <|> (string "green" $> Green)
+    <|> (string "blue" $> Blue)
 
 numberOfColor :: Color -> Set -> Int
-numberOfColor color set = fromMaybe 0 (Map.lookup color set)
+numberOfColor color set = fromMaybe 0 $ Map.lookup color set
 
 gameImpossible :: Game -> Bool
 gameImpossible (Game {gameSets}) =
@@ -86,13 +87,8 @@ main = do
     Right games -> do
       putStrLn $
         "Part 1: "
-          ++ show
-            ( sum $
-                map gameId $
-                  filter (not . gameImpossible) games
-            )
+          ++ show (sum $ map gameId $ filter (not . gameImpossible) games)
       putStrLn $
         "Part 2: "
           ++ show
-            ( sum $ map ((\(r, g, b) -> r * g * b) . fewestCubesForGame) games
-            )
+            (sum $ map ((\(r, b, g) -> r * b * g) . fewestCubesForGame) games)
