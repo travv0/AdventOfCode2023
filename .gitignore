@@ -1,3 +1,5 @@
 .idea
 .vim
 .vscode
+*.cabal
+.ionide
