@@ -1,6 +1,5 @@
 .idea
 .vim
 .vscode
-*.cabal
 .ionide
 dist*
