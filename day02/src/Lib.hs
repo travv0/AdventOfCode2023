@@ -1,7 +1,7 @@
 {-# LANGUAGE ImportQualifiedPost #-}
 {-# LANGUAGE NamedFieldPuns #-}
 
-module Lib where
+module Lib (module Lib) where
 
 import Data.Functor (($>))
 import Data.Map qualified as Map
