@@ -26,8 +26,7 @@ let parseInput (lines: string array) =
 
     let dirs =
         Seq.map
-            (fun d ->
-                match d with
+            (function
                 | 'L' -> L
                 | 'R' -> R
                 | _ -> failwith "invalid input")
