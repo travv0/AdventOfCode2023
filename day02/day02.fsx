@@ -3,7 +3,12 @@
 open System
 open FParsec
 
-let input = IO.File.ReadAllText "input.txt"
+let fileName =
+    match fsi.CommandLineArgs |> Array.toList with
+    | _ :: fn :: _ -> fn
+    | _ -> "input.txt"
+
+let input = IO.File.ReadAllText fileName
 
 type Color =
     | Blue

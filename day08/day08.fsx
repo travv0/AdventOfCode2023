@@ -54,7 +54,12 @@ let run graph dirs nodeLabel =
 
     run' dirs nodeLabel 0
 
-let input = File.ReadAllLines "input.txt"
+let fileName =
+    match fsi.CommandLineArgs |> Array.toList with
+    | _ :: fn :: _ -> fn
+    | _ -> "input.txt"
+
+let input = File.ReadAllLines fileName
 
 let dirs, graph = parseInput input
 run graph (List.ofSeq dirs) "AAA" |> printfn "Part 1: %d"

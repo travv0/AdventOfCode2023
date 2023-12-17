@@ -1,6 +1,11 @@
 open System
 
-let lines = System.IO.File.ReadAllLines("input.txt")
+let fileName =
+    match fsi.CommandLineArgs |> Array.toList with
+    | _ :: fn :: _ -> fn
+    | _ -> "input.txt"
+
+let lines = System.IO.File.ReadAllLines(fileName)
 
 type Scratchcard =
     { number: int

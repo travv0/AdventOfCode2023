@@ -26,8 +26,12 @@ module List =
 
         makePairs' l [] |> List.rev
 
+let fileName =
+    match fsi.CommandLineArgs |> Array.toList with
+    | _ :: fn :: _ -> fn
+    | _ -> "input.txt"
 
-let input = System.IO.File.ReadAllText("input.txt")
+let input = System.IO.File.ReadAllText(fileName)
 
 let createMap (text: string) : ConversionMap =
     let lines = text.Split([| "\r\n"; "\n" |], StringSplitOptions.None) |> Array.tail

@@ -3,7 +3,12 @@ open System.IO
 
 type Symbol = { symbol: char; x: int; y: int }
 
-let input = File.ReadAllLines("input.txt") |> Array.map (fun line -> line + ".")
+let fileName =
+    match fsi.CommandLineArgs |> Array.toList with
+    | _ :: fn :: _ -> fn
+    | _ -> "input.txt"
+
+let input = File.ReadAllLines(fileName) |> Array.map (fun line -> line + ".")
 
 let width = String.length input[0]
 let height = Array.length input

@@ -25,7 +25,12 @@ let getCalibrationValue (line: string) =
     let lastDigit = Seq.findBack Char.IsDigit line
     int <| $"%c{firstDigit}%c{lastDigit}"
 
-let lines = File.ReadLines("input.txt")
+let fileName =
+    match fsi.CommandLineArgs |> Array.toList with
+    | _ :: fn :: _ -> fn
+    | _ -> "input.txt"
+
+let lines = File.ReadLines(fileName)
 
 lines |> Seq.map getCalibrationValue |> Seq.sum |> printfn "Part 1: %d"
 

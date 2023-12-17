@@ -2,7 +2,12 @@ open System
 
 type Race = { time: uint64; recordDist: uint64 }
 
-let input = IO.File.ReadAllLines("input.txt")
+let fileName =
+    match fsi.CommandLineArgs |> Array.toList with
+    | _ :: fn :: _ -> fn
+    | _ -> "input.txt"
+
+let input = IO.File.ReadAllLines(fileName)
 
 let parseInputPart1 (lines: string array) =
     let times =

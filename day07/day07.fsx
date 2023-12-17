@@ -87,7 +87,12 @@ let handComparer classifyFn jValue (hand1: Hand) (hand2: Hand) : int =
         | Some cards -> cards ||> cardComparer jValue
         | None -> 0
 
-let input = IO.File.ReadAllLines("input.txt")
+let fileName =
+    match fsi.CommandLineArgs |> Array.toList with
+    | _ :: fn :: _ -> fn
+    | _ -> "input.txt"
+
+let input = IO.File.ReadAllLines(fileName)
 let hands = parseInput input
 
 hands
