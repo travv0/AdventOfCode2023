@@ -1,5 +1,4 @@
 open System
-open System.Collections.Generic
 
 type Range =
     { sourceStart: uint64
